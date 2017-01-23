@@ -23,10 +23,8 @@ namespace SpecificationWEB.Controllers
         public ActionResult Index(int? balance = 0, int? balanceLess = 40000, List<User> model = null)
         {
             Session["Filtering"] = "Balance filtering Larger: " + balance + " and Less: " + balanceLess;
-            Expression<Func<User, bool>> expres = x => x.Balance > balance;
-            Expression<Func<User, bool>> expres2 = x => x.Balance < balanceLess;
-            ISpecification<User> specificationGreate = new ExpessionEntity<User>(expres);
-            ISpecification<User> andSpecification = specificationGreate.And(new ExpessionEntity<User>(expres2));
+            ISpecification<User> specificationGreate = new LargerBalanceUserSpecification(balance.Value);
+            ISpecification<User> andSpecification = specificationGreate.And(new LessedBalanceUserSpecification(balanceLess.Value));
             var createdRequest = this.repository.GetAll(andSpecification);
             listFiltering = createdRequest.ToList();   
 

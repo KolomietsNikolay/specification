@@ -132,6 +132,8 @@
     <Compile Include="Specification\AndExpessionEntity.cs" />
     <Compile Include="Specification\ExpessionEntity.cs" />
     <Compile Include="Specification\ISpecification.cs" />
+    <Compile Include="Specification\LargerBalanceUserSpecification.cs" />
+    <Compile Include="Specification\LessedBalanceUserSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
