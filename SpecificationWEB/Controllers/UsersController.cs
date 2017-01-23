@@ -27,8 +27,8 @@ namespace SpecificationWEB.Controllers
             Expression<Func<User, bool>> expres2 = x => x.Balance < balanceLess;
             ISpecification<User> specificationGreate = new ExpessionEntity<User>(expres);
             ISpecification<User> andSpecification = specificationGreate.And(new ExpessionEntity<User>(expres2));
-            
-            listFiltering = this.repository.GetAll().Where(andSpecification.IsSatisfiedBy()).ToList();   
+            var createdRequest = this.repository.GetAll(andSpecification);
+            listFiltering = createdRequest.ToList();   
 
             return View(listFiltering);
         }
