@@ -1,5 +1,6 @@
 ﻿using SpecificationWEB.Context;
 using SpecificationWEB.Models;
+using SpecificationWEB.Specification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,9 @@ namespace SpecificationWEB.Repository
             this.context = new SysytemUsersDbContext();
         }
 
-        public IQueryable<User> GetAll()
+        public IEnumerable<User> GetAll(ISpecification<User> specification)
         {
-            return this.context.Users.ToList().AsQueryable();
+            return this.context.Users.Where(specification.IsSatisfiedBy().Compile());
         }
     }
 }
